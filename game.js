@@ -12,12 +12,20 @@
 // and interact with the button on the game screen.
 // Keeping this in one object makes it easier to move,
 // resize, or restyle the button later.
+const riskBtn = {
+  x: 400,
+  y: 480,
+  w: 260,
+  h: 80,
+  label: "TAKE THE RISK",
+};
+
 const gameBtn = {
   x: 400, // x position (centre of the button)
-  y: 550, // y position (centre of the button)
+  y: 580, // y position (centre of the button)
   w: 260, // width
-  h: 90, // height
-  label: "PRESS HERE", // text shown on the button
+  h: 80, // height
+  label: "PLAY IT SAFE", // text shown on the button
 };
 
 // ------------------------------
@@ -31,25 +39,23 @@ function drawGame() {
 
   // ---- Title and instructions text ----
   fill(0); // black text
-  textSize(32);
+  textSize(40);
   textAlign(CENTER, CENTER);
-  text("Game Screen", width / 2, 160);
+  text("A Choice to Make", width / 2, 220);
 
   textSize(18);
-  text(
-    "Click the button (or press ENTER) for a random result.",
-    width / 2,
-    210,
-  );
+  text("You are standing at a crossroad. One path is risky,", width / 2, 280);
+  text("the other feels safe. What do you do?", width / 2, 300);
 
   // ---- Draw the button ----
   // We pass the button object to a helper function
   drawGameButton(gameBtn);
+  drawGameButton(riskBtn);
 
   // ---- Cursor feedback ----
   // If the mouse is over the button, show a hand cursor
   // Otherwise, show the normal arrow cursor
-  cursor(isHover(gameBtn) ? HAND : ARROW);
+  cursor(isHover(riskBtn) || isHover(gameBtn) ? HAND : ARROW);
 }
 
 // ------------------------------
@@ -79,7 +85,7 @@ function drawGameButton({ x, y, w, h, label }) {
 
   // Draw the button text
   fill(0);
-  textSize(28);
+  textSize(24);
   textAlign(CENTER, CENTER);
   text(label, x, y);
 }
@@ -90,20 +96,10 @@ function drawGameButton({ x, y, w, h, label }) {
 // This function is called from main.js
 // only when currentScreen === "game"
 function gameMousePressed() {
-  // Only trigger the outcome if the button is clicked
-  if (isHover(gameBtn)) {
-    triggerRandomOutcome();
-  }
-}
-
-// ------------------------------
-// Keyboard input for this screen
-// ------------------------------
-// Allows keyboard-only interaction (accessibility + design)
-function gameKeyPressed() {
-  // ENTER key triggers the same behaviour as clicking the button
-  if (keyCode === ENTER) {
-    triggerRandomOutcome();
+  if (isHover(riskBtn)) {
+    currentScreen = "risk";
+  } else if (isHover(gameBtn)) {
+    currentScreen = "safe";
   }
 }
 

@@ -120,7 +120,7 @@ function drawButton({ x, y, w, h, label }) {
 
     // Softer shadow when not hovered
     drawingContext.shadowBlur = 8;
-    drawingContext.shadowColor = color(220, 220, 220);
+    drawingContext.shadowColor = color(220);
   }
 
   // Draw the rounded rectangle button

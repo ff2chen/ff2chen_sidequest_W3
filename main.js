@@ -21,7 +21,7 @@
 //
 // We store the “name” of the current screen as a string.
 // Only one screen should be active at a time.
-let currentScreen = "start"; // "start" | "instr" | "game" | "win" | "lose"
+let currentScreen = "start"; // "start" | "instr" | "game" | "risk" | "safe" | "win" | "lose"
 
 // ------------------------------
 // setup() runs ONCE at the beginning
@@ -47,12 +47,16 @@ function draw() {
   //   game.js          → drawGame()
   //   win.js           → drawWin()
   //   lose.js          → drawLose()
-
+  //   risk.js          -> drawRisk()
+  //   safe.js          -> drawSafe()
+  console.log("SCREEN:", currentScreen);
   if (currentScreen === "start") drawStart();
   else if (currentScreen === "instr") drawInstr();
   else if (currentScreen === "game") drawGame();
   else if (currentScreen === "win") drawWin();
   else if (currentScreen === "lose") drawLose();
+  else if (currentScreen === "risk") drawRisk();
+  else if (currentScreen === "safe") drawSafe();
 
   // (Optional teaching note)
   // This “if/else chain” is a very common early approach.
@@ -72,14 +76,16 @@ function mousePressed() {
   // game.js          → gameMousePressed()
   // win.js           → winMousePressed()
   // lose.js          → loseMousePressed()
+  // risk.js          -> riskMousePressed()
+  // safe.js          -> safeMousePressed()
 
-  if (currentScreen === "start") startMousePressed();
-  else if (currentScreen === "instr") instrMousePressed();
-  else if (currentScreen === "game") gameMousePressed();
-  // The ?.() means “call this function only if it exists”
-  // This prevents errors if a screen doesn’t implement a handler.
+  if (currentScreen === "start") startMousePressed?.();
+  else if (currentScreen === "instr") instrMousePressed?.();
+  else if (currentScreen === "game") gameMousePressed?.();
   else if (currentScreen === "win") winMousePressed?.();
   else if (currentScreen === "lose") loseMousePressed?.();
+  else if (currentScreen === "risk") riskMousePressed?.();
+  else if (currentScreen === "safe") safeMousePressed?.();
 }
 
 // ------------------------------
@@ -93,12 +99,16 @@ function keyPressed() {
   // game.js          → gameKeyPressed()
   // win.js           → winKeyPressed()
   // lose.js          → loseKeyPressed()
+  // risk.js          -> riskKeyPressed()
+  // safe.js          -> safeKeyPressed()
 
-  if (currentScreen === "start") startKeyPressed();
-  else if (currentScreen === "instr") instrKeyPressed();
+  if (currentScreen === "start") startKeyPressed?.();
+  else if (currentScreen === "instr") instrKeyPressed?.();
   else if (currentScreen === "game") gameKeyPressed?.();
   else if (currentScreen === "win") winKeyPressed?.();
   else if (currentScreen === "lose") loseKeyPressed?.();
+  else if (currentScreen === "risk") riskKeyPressed?.();
+  else if (currentScreen === "safe") safeKeyPressed?.();
 }
 
 // ------------------------------------------------------------

@@ -6,7 +6,7 @@ GBDA302 Week 3 Example 1: Instructions Screen with Back button
 
 ## Authors
 
-Fei Fei
+Fei Fei Chen
 
 ---
 
